@@ -1,0 +1,2 @@
+export const OPERAND_ENTER = "OPERAND_ENTER";
+export const OPERATOR_ENTER = "OPERATOR_ENTER";

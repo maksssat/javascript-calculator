@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { operandEnter, operatorEnter } from "../Redux/actions";
+
 const numbers = [
   {
     value: 7,
@@ -40,7 +43,7 @@ const numbers = [
     id: "zero",
   },
   {
-    value: ",",
+    value: ".",
     id: "decimal",
   },
   {
@@ -72,18 +75,23 @@ const operators = [
   },
 ];
 
-export default function Buttons(props) {
+export default function Buttons() {
+  const dispatch = useDispatch();
+
+  function handleOperandClick({ target }) {
+    dispatch(operandEnter(target.id, target.value));
+  }
+
+  function handleOperatorClick({ target }) {
+    dispatch(operatorEnter(target.id, target.value));
+  }
+
   return (
     <div className="buttons">
       <div className="numbers">
         {numbers.map(({ value, id }) => {
           return (
-            <button
-              id={id}
-              onClick={props.onNumberClick}
-              value={value}
-              key={id}
-            >
+            <button id={id} onClick={handleOperandClick} value={value} key={id}>
               {value}
             </button>
           );
@@ -93,7 +101,7 @@ export default function Buttons(props) {
         {operators.map(({ id, value }) => {
           return (
             <button
-              onClick={props.onOperatorClick}
+              onClick={handleOperatorClick}
               id={id}
               key={id}
               value={value}

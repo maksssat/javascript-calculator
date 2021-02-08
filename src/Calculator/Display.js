@@ -1,8 +1,10 @@
-export default function Display(props) {
+import { useSelector } from "react-redux";
+
+export default function Display() {
+  const display = useSelector((state) => state.calculator.display);
   return (
     <div id="display">
-      <div className="display">{props.display}</div>
-      <div className="result">{props.result}</div>
+      <div className="display">{display}</div>
     </div>
   );
 }
