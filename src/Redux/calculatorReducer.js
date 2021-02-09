@@ -103,19 +103,19 @@ export default function calculatorReducer(state = initialState, action) {
       } else {
         switch (id) {
           case "divide":
-            if (/\d(\/|\*|-|\+)$/.test(display)) {
+            if (/\d(\/|\*|-|\+)+$/.test(display)) {
               return {
                 ...state,
-                display: display.replace(/(\/|\*|-|\+)$/, "/"),
+                display: display.replace(/(\/|\*|-|\+)+$/, "/"),
               };
             } else if (/\d$/.test(display) && display !== "0") {
               return { ...state, display: `${display}${value}` };
             } else return state;
           case "multiply":
-            if (/\d(\/|\*|-|\+)$/.test(display)) {
+            if (/\d(\/|\*|-|\+)+$/.test(display)) {
               return {
                 ...state,
-                display: display.replace(/(\/|\*|-|\+)$/, "*"),
+                display: display.replace(/(\/|\*|-|\+)+$/, "*"),
               };
             } else if (/\d$/.test(display) && display !== "0") {
               return { ...state, display: `${display}${value}` };
@@ -129,10 +129,10 @@ export default function calculatorReducer(state = initialState, action) {
               return { ...state, display: "-" };
             } else return state;
           case "add":
-            if (/\d(\/|\*|-|\+)$/.test(display)) {
+            if (/\d(\/|\*|-|\+)+$/.test(display)) {
               return {
                 ...state,
-                display: display.replace(/(\/|\*|-|\+)$/, "+"),
+                display: display.replace(/(\/|\*|-|\+)+$/, "+"),
               };
             } else if (/\d$/.test(display) && display !== "0") {
               return { ...state, display: `${display}${value}` };
