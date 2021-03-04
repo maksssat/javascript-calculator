@@ -38,7 +38,6 @@ export default function calculatorReducer(state = initialState, action) {
               polishNotation.push(...polishNotationStack.splice(-1, 1));
             }
             polishNotationStack.push(input[i]);
-            console.log(polishNotationStack);
           }
         }
 
@@ -47,8 +46,6 @@ export default function calculatorReducer(state = initialState, action) {
           ...polishNotation,
           ...polishNotationStack.reverse(),
         ];
-
-        console.log(polishNotationResult);
 
         //вычисление результата из обратной польской нотации
         polishNotationResult.forEach((item) => {
@@ -74,9 +71,9 @@ export default function calculatorReducer(state = initialState, action) {
           }
         });
 
-        console.log(output);
-
-        return { ...state, display: output[0] };
+        if (Number.isInteger(output[0])) {
+          return { ...state, display: output[0] };
+        } else return { ...state, display: output[0].toFixed(2) };
       } else if (
         display.length > 13 ||
         (id === "decimal" && (/\.$/.test(display) || /\\.\d+$/.test(display)))
